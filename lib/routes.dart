@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// Importaciones de tus pantallas existentes
+// Importaciones originales de tu repositorio
 import 'screens/splash_screen.dart';
 import 'screens/login/login_screen.dart';
 import 'screens/login/login_options_screen.dart';
@@ -9,42 +9,30 @@ import 'screens/registration/gender_selection_screen.dart';
 import 'screens/registration/photo_upload_screen.dart';
 import 'screens/home_screen.dart';
 
-// Importaciones de las nuevas pantallas Luxy (ajusta la ruta según donde las creaste)
+// Importaciones de las nuevas pantallas en la carpeta lib/ui
 import 'ui/discovery_page.dart';
 import 'ui/likes_page.dart';
-import 'ui/qr_pass_page.dart';
 import 'ui/career_step.dart';
+import 'ui/qr_pass_page.dart';
 
-class AppRoutes {
-  static const String splash = '/';
-  static const String loginOptions = '/login_options';
-  static const String login = '/login';
-  static const String nameInput = '/name_input';
-  static const String discovery = '/discovery';
-  static const String likes = '/likes';
-  static const String qrPass = '/qr_pass';
-  static const String career = '/career_step';
+final Map<String, WidgetBuilder> appRoutes = {
+  // Rutas iniciales y de autenticación
+  '/': (context) => const SplashScreen(),
+  '/login_options': (context) => const LoginOptionsScreen(),
+  '/login': (context) => const LoginScreen(),
 
-  static Map<String, WidgetBuilder> getRoutes() {
-    return {
-      splash: (context) => const SplashScreen(),
-      loginOptions: (context) => const LoginOptionsScreen(),
-      login: (context) => const LoginScreen(),
+  // Flujo de Registro y Wizard de Perfil
+  '/name_input': (context) => const NameInputScreen(),
+  '/birthday_input': (context) => const BirthdayInputScreen(),
+  '/gender_selection': (context) => const GenderSelectionScreen(),
+  '/photo_upload': (context) => const PhotoUploadScreen(),
+  '/career_step': (context) => const CareerStep(), // Nuevo selector de ingresos dorado
 
-      // Registro y Wizard
-      nameInput: (context) => const NameInputScreen(),
-      career: (context) => const CareerStep(), // El nuevo selector de ingresos
+  // Secciones principales "Luxy Real"
+  '/discovery': (context) => const DiscoveryPage(), // Swipe Deck con cards doradas
+  '/likes': (context) => const LikesPage(),         // Pantalla con Blur para no-BLACK
+  '/qr_pass': (context) => const QrPassPage(),       // Pase de eventos exclusivo
 
-      // Main Tabs Luxy
-      discovery: (context) => const DiscoveryPage(), // Swipe Deck dorado
-      likes: (context) => const LikesPage(),         // Who liked me con Blur
-      qrPass: (context) => const QrPassPage(),       // QR de eventos
-
-      // Home por defecto
-      '/home': (context) => const HomeScreen(),
-    };
-  }
-}
-
-// Para usarlo en tu main.dart:
-// routes: AppRoutes.getRoutes(),
+  // Home y otros
+  '/home': (context) => const HomeScreen(),
+};
