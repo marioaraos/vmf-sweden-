@@ -1,0 +1,61 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Función para verificar si el usuario está autenticado
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Función para verificar si el usuario es dueño del documento
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+
+    // Reglas para la colección de usuarios
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow write: if isOwner(userId);
+    }
+
+    // Reglas para la colección de chats/mensajes
+    match /messages/{matchId} {
+      // Un usuario solo puede leer/escribir si es parte del match
+      allow read, write: if isAuthenticated() && 
+        (request.auth.uid in get(/databases/$(database)/documents/matches/$(matchId)).data.users);
+      
+      match /msgs/{msgId} {
+        allow read, write: if isAuthenticated() && 
+          (request.auth.uid in get(/databases/$(database)/documents/matches/$(matchId)).data.users);
+      }
+    }
+
+    // Reglas para Matches
+    match /matches/{matchId} {
+      allow read: if isAuthenticated() && (request.auth.uid in resource.data.users);
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated() && (request.auth.uid in resource.data.users);
+    }
+
+    // Reglas para Visitantes (Visitors)
+    match /visitors/{userId} {
+      allow read: if isOwner(userId);
+      allow create, update: if isAuthenticated(); // Cualquiera puede dejar una visita, pero solo el dueño la lee
+    }
+
+    // Reglas para Swipes (Privacidad máxima)
+    match /swipes/{userId} {
+      allow read, write: if isOwner(userId);
+      
+      match /given/{targetId} {
+        allow read, write: if isOwner(userId);
+      }
+    }
+    
+    // Reglas para Eventos (Públicos para lectura, admin para escritura)
+    match /events/{eventId} {
+      allow read: if isAuthenticated();
+      allow write: if false; // Solo vía Admin SDK / Cloud Functions
+    }
+  }
+}
