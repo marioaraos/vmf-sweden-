@@ -49,6 +49,39 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+#!/bin/bash
+
+  echo "🚀 VMF GitHub Update Script"
+  
+  # Verificar que estamos en un repo git
+  if [ ! -d ".git" ]; then
+  echo "❌ Este directorio no es un repositorio Git"
+  exit 1
+  fi
+  
+  # Mostrar estado
+  echo "📌 Estado del repositorio:"
+  git status
+  
+  # Preguntar mensaje de commit
+  echo ""
+read -p "📝 Escribe el mensaje del commit: " commitmsg
+
+# Agregar todos los cambios
+git add .
+
+# Crear commit
+git commit -m "$commitmsg"
+
+# Obtener rama actual
+  branch=$(git branch --show-current)
+
+# Push
+echo "⬆️ Subiendo a GitHub (rama: $branch)..."
+  git push origin "$branch"
+  
+  echo "✅ Repo actualizado correctamente"
+
 
 flutter:
   uses-material-design: true
