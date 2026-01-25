@@ -52,7 +52,6 @@ class _ProfileCreatedScreenState extends State<ProfileCreatedScreen> with Ticker
   late List<FloatingBubble> _bubbles;
   final String _videoAsset = 'assets/videos/legacy.mp4';
   double _time = 0;
-  final int _bubbleCount = 10;
 
   String userName = "ELOHIM GOLD";
   String? userPhotoUrl;
@@ -74,10 +73,11 @@ class _ProfileCreatedScreenState extends State<ProfileCreatedScreen> with Ticker
       {'text': 'VISITORS', 'route': '/visitors'}, 
       {'text': 'MAP', 'route': '/map'}, 
       {'text': 'VERIFY', 'route': '/face_verification'},
+      {'text': 'BOVEDA', 'route': '/vault'},
       {'text': 'LUX BLACK', 'route': '/lux_black'}, 
     ];
 
-    _bubbles = List.generate(_bubbleCount, (i) {
+    _bubbles = List.generate(labels.length, (i) {
       return FloatingBubble(
         id: i,
         position: Offset(50.0 + _rand.nextDouble() * 300, 100.0 + _rand.nextDouble() * 500),

@@ -108,6 +108,7 @@ class _DashboardTab extends StatelessWidget {
                     _buildBubbleMenu(context, 'Luxy Chat', Icons.forum_outlined, '/chat', primaryGold),
                     _buildBubbleMenu(context, 'Visitantes', Icons.people_outline, '/visitors', primaryGold),
                     _buildBubbleMenu(context, 'Santuario', Icons.account_balance, '/sanctuary', primaryGold),
+                    _buildBubbleMenu(context, 'Boveda', Icons.lock_outline, '/vault', primaryGold),
                     _buildBubbleMenu(context, 'Verificar', Icons.verified_user_outlined, '/face_verification', primaryGold),
                   ],
                 ),
