@@ -47,6 +47,7 @@ final Map<String, WidgetBuilder> appRoutes = {
   // RUTA INICIAL
   '/': (context) => const ProfileCreatedScreen(),
   '/intro': (context) => const IntroVideoScreen(),
+  '/register': (context) => const IntroVideoScreen(),
 
   // RUTAS DE LOGIN
   '/login_options': (context) => const LoginOptionsScreen(),
@@ -57,6 +58,22 @@ final Map<String, WidgetBuilder> appRoutes = {
   '/name': (context) => const NameInputScreen(),
   '/birthday': (context) => const BirthdayInputScreen(),
   '/career_step': (context) => const CareerStep(),
+  '/notifications': (context) => const NotificationsPermissionScreen(),
+  '/photos_single': (context) => const PhotoUploadSingleScreen(),
+  '/photos_multi': (context) {
+    final args = ModalRoute.of(context)?.settings.arguments;
+    if (args is File) {
+      return PhotoUploadMultiScreen(initialPhoto: args);
+    }
+    return const PhotoUploadMultiScreen();
+  },
+  '/profile_created': (context) {
+    final args = ModalRoute.of(context)?.settings.arguments;
+    if (args is File) {
+      return ProfileCreatedScreen(userProfileImage: args);
+    }
+    return const ProfileCreatedScreen();
+  },
 
   // 2. CAMBIO CLAVE: La ruta /home ahora carga el MainShell para mostrar las burbujas
   '/home': (context) => const MainShell(),
