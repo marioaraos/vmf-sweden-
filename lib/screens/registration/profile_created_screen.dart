@@ -172,7 +172,6 @@ class _ProfileCreatedScreenState extends State<ProfileCreatedScreen> with Ticker
                 title: const Text('View My Profile', style: TextStyle(color: Colors.white)),
                 onTap: () {
                   Navigator.pop(context);
-                  Navigator.pushNamed(context, '/profile');
                 },
               ),
               ListTile(
@@ -180,7 +179,6 @@ class _ProfileCreatedScreenState extends State<ProfileCreatedScreen> with Ticker
                 title: const Text('Identity Verification', style: TextStyle(color: Colors.white)),
                 onTap: () {
                   Navigator.pop(context);
-                  Navigator.pushNamed(context, '/face_verification');
                 },
               ),
               ListTile(
@@ -230,7 +228,7 @@ class _ProfileCreatedScreenState extends State<ProfileCreatedScreen> with Ticker
                 onTap: () async {
                   Navigator.pop(context);
                   await FirebaseAuth.instance.signOut();
-                  Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+                  Navigator.pushNamedAndRemoveUntil(context, '/intro', (route) => false);
                 },
               ),
               const SizedBox(height: 30),
@@ -398,7 +396,7 @@ class _ProfileCreatedScreenState extends State<ProfileCreatedScreen> with Ticker
                   ),
                 ),
                 GestureDetector(
-                  onTap: () => Navigator.pushNamed(context, '/visitors'),
+                  onTap: () {},
                   child: Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
@@ -437,10 +435,7 @@ class _ProfileCreatedScreenState extends State<ProfileCreatedScreen> with Ticker
           showUnselectedLabels: false,
           onTap: (index) {
             HapticFeedback.mediumImpact();
-            if (index == 1) Navigator.pushNamed(context, '/discover');
-            else if (index == 2) Navigator.pushNamed(context, '/aura');
-            else if (index == 3) Navigator.pushNamed(context, '/events');
-            else if (index == 4) _showMemberCard();
+            if (index == 4) _showMemberCard();
           },
           type: BottomNavigationBarType.fixed,
           elevation: 0,
@@ -480,8 +475,6 @@ class _ProfileCreatedScreenState extends State<ProfileCreatedScreen> with Ticker
           HapticFeedback.mediumImpact(); 
           if (b.route == '/lux_black') {
             LuxyBlackModal.show(context);
-          } else {
-            Navigator.pushNamed(context, b.route); 
           }
         },
         onPanStart: (details) {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:vmf_lux_project/services/payment_service.dart';
 import 'routes.dart';
 
 void main() async {
@@ -15,13 +14,6 @@ void main() async {
     print("Error inicializando Firebase: $e");
   }
 
-  // Inicializa el Servicio de Pagos VMF Lux
-  try {
-    await PaymentService.instance.init();
-  } catch (e) {
-    print("Error inicializando Pagos: $e");
-  }
-  
   // Inicializa los datos de formato de fecha para el idioma español
   await initializeDateFormatting('es', null);
   
