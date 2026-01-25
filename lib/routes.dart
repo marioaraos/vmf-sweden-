@@ -25,6 +25,17 @@ import 'package:vmf_lux_project/screens/discover_screen.dart';
 import 'package:vmf_lux_project/screens/events_screen.dart';
 import 'package:vmf_lux_project/screens/profile_screen.dart';
 import 'package:vmf_lux_project/screens/messages_screen.dart';
+import 'package:vmf_lux_project/screens/community_screen.dart';
+import 'package:vmf_lux_project/screens/aura/aura_screen.dart';
+import 'package:vmf_lux_project/screens/chat/luxy_chat_screen.dart';
+import 'package:vmf_lux_project/screens/face_verification_screen.dart';
+import 'package:vmf_lux_project/screens/historia/vmf_history_screen.dart';
+import 'package:vmf_lux_project/screens/live/masterclass_screen.dart';
+import 'package:vmf_lux_project/screens/mapa/vmf_map_screen.dart';
+import 'package:vmf_lux_project/screens/ofrendas/offering_screen.dart';
+import 'package:vmf_lux_project/screens/sanctuary_screen.dart';
+import 'package:vmf_lux_project/screens/terms_screen.dart';
+import 'package:vmf_lux_project/screens/visitors_screen.dart';
 
 // Nuevas Pantallas Luxy (Ubicadas en lib/ui)
 import 'package:vmf_lux_project/ui/discovery_page.dart';
@@ -52,9 +63,21 @@ final Map<String, WidgetBuilder> appRoutes = {
 
   // RUTAS DE PESTAÑAS (Opcionales para navegación directa)
   '/discovery': (context) => const DiscoveryPage(),
+  '/discover': (context) => const DiscoverScreen(),
   '/likes': (context) => const LikesPage(),
   '/events': (context) => const EventsScreen(),
   '/qr_pass': (context) => const QrPassPage(),
   '/profile': (context) => const ProfilePage(),
   '/messages': (context) => const MessagesScreen(),
+  '/community': (context) => const CommunityScreen(),
+  '/aura': (context) => const AuraScreen(),
+  '/live': (context) => const MasterclassScreen(),
+  '/offering': (context) => const OfferingScreen(),
+  '/history': (context) => const VMFHistoryScreen(),
+  '/chat': (context) => const LuxyChatScreen(),
+  '/visitors': (context) => const VisitorsScreen(),
+  '/map': (context) => const VMFMapScreen(),
+  '/face_verification': (context) => const FaceVerificationScreen(),
+  '/sanctuary': (context) => const SanctuaryScreen(),
+  '/terms': (context) => const TermsScreen(),
 };
