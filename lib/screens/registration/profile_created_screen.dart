@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
 import 'dart:math';
@@ -7,8 +6,6 @@ import 'package:video_player/video_player.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:vmf_lux_project/widgets/luxy_black_modal.dart';
 import 'package:vmf_lux_project/widgets/chat_backup_dialog.dart';
 
@@ -62,7 +59,6 @@ class _ProfileCreatedScreenState extends State<ProfileCreatedScreen> with Ticker
   @override
   void initState() {
     super.initState();
-    _loadUserProfile();
 
     final List<Map<String, dynamic>> labels = [
       {'text': 'AURA', 'route': '/aura'}, 
@@ -92,23 +88,6 @@ class _ProfileCreatedScreenState extends State<ProfileCreatedScreen> with Ticker
     });
 
     _ticker = createTicker(_update)..start();
-  }
-
-  Future<void> _loadUserProfile() async {
-    try {
-      User? user = FirebaseAuth.instance.currentUser;
-      if (user != null) {
-        final doc = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
-        if (doc.exists && mounted) {
-          setState(() {
-            userName = doc.data()?['name'] ?? "VMF MEMBER";
-            userPhotoUrl = doc.data()?['photoUrl'];
-          });
-        }
-      }
-    } catch (e) {
-      debugPrint("Error Firebase: $e");
-    }
   }
 
   void _update(Duration elapsed) {
@@ -225,9 +204,8 @@ class _ProfileCreatedScreenState extends State<ProfileCreatedScreen> with Ticker
               ListTile(
                 leading: const Icon(Icons.logout, color: Colors.redAccent),
                 title: const Text('Log-out', style: TextStyle(color: Colors.redAccent)),
-                onTap: () async {
+                onTap: () {
                   Navigator.pop(context);
-                  await FirebaseAuth.instance.signOut();
                   Navigator.pushNamedAndRemoveUntil(context, '/intro', (route) => false);
                 },
               ),
