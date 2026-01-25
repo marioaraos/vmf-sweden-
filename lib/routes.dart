@@ -35,6 +35,7 @@ import 'package:vmf_lux_project/screens/mapa/vmf_map_screen.dart';
 import 'package:vmf_lux_project/screens/ofrendas/offering_screen.dart';
 import 'package:vmf_lux_project/screens/sanctuary_screen.dart';
 import 'package:vmf_lux_project/screens/terms_screen.dart';
+import 'package:vmf_lux_project/screens/vault_screen.dart';
 import 'package:vmf_lux_project/screens/visitors_screen.dart';
 
 // Nuevas Pantallas Luxy (Ubicadas en lib/ui)
@@ -96,5 +97,6 @@ final Map<String, WidgetBuilder> appRoutes = {
   '/map': (context) => const VMFMapScreen(),
   '/face_verification': (context) => const FaceVerificationScreen(),
   '/sanctuary': (context) => const SanctuaryScreen(),
+  '/vault': (context) => const VaultScreen(),
   '/terms': (context) => const TermsScreen(),
 };
