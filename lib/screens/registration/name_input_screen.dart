@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'widgets/custom_button.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class NameInputScreen extends StatefulWidget {
   const NameInputScreen({Key? key}) : super(key: key);
@@ -27,33 +25,10 @@ class _NameInputScreenState extends State<NameInputScreen> {
     });
   }
 
-  Future<void> _saveNameAndContinue() async {
+  void _saveNameAndContinue() {
     final name = _nameController.text.trim();
     if (name.isEmpty) return;
-
-    try {
-      User? user = FirebaseAuth.instance.currentUser;
-      if (user == null) {
-        final credential = await FirebaseAuth.instance.signInAnonymously();
-        user = credential.user;
-      }
-
-      if (user != null) {
-        await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
-          'name': name,
-          'lastUpdated': FieldValue.serverTimestamp(),
-        }, SetOptions(merge: true));
-        
-        if (mounted) {
-          Navigator.pushNamed(context, '/birthday');
-        }
-      }
-    } catch (e) {
-      debugPrint("Error guardando nombre: $e");
-      if (mounted) {
-        Navigator.pushNamed(context, '/birthday'); // Avanzar aunque falle la red
-      }
-    }
+    Navigator.pushNamed(context, '/birthday');
   }
 
   @override
@@ -167,7 +142,7 @@ class _NameInputScreenState extends State<NameInputScreen> {
                   LuxyButton(
                     text: "Siguiente",
                     isActive: isButtonEnabled,
-                    onPressed: _saveNameAndContinue, // 🔥 Ahora guarda en Firebase
+                    onPressed: _saveNameAndContinue,
                   ),
                   const SizedBox(height: 15),
                 ],
