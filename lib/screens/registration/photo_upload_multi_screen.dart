@@ -132,7 +132,7 @@ class _PhotoUploadMultiScreenState extends State<PhotoUploadMultiScreen> {
                     child: TextButton(
                       onPressed: () {
                         Navigator.pop(context);
-                        Navigator.pushNamed(context, '/profile_created', arguments: _photos[0]);
+                        Navigator.pushNamed(context, '/verification_pending', arguments: _photos[0]);
                       },
                       child: Text('Saltar', style: TextStyle(color: luxyGold, fontSize: 16, fontWeight: FontWeight.bold)),
                     ),
@@ -242,7 +242,7 @@ class _PhotoUploadMultiScreenState extends State<PhotoUploadMultiScreen> {
                     text: "Siguiente",
                     isActive: _photos[0] != null,
                     onPressed: () {
-                      Navigator.pushNamed(context, '/profile_created', arguments: _photos[0]);
+                      Navigator.pushNamed(context, '/verification_pending', arguments: _photos[0]);
                     },
                   ),
                 ],

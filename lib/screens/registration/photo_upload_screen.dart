@@ -147,7 +147,7 @@ class _PhotoUploadScreenState extends State<PhotoUploadScreen> {
                     child: TextButton(
                       onPressed: () {
                         Navigator.pop(context);
-                        Navigator.pushNamed(context, '/profile_created');
+                        Navigator.pushNamed(context, '/verification_pending');
                       },
                       child: Text('Skip', style: TextStyle(color: luxyGold, fontSize: 16, fontWeight: FontWeight.bold)),
                     ),
@@ -260,7 +260,7 @@ class _PhotoUploadScreenState extends State<PhotoUploadScreen> {
                   LuxyButton(
                     text: "Next",
                     isActive: _photos[0] != null,
-                    onPressed: () => Navigator.pushNamed(context, '/profile_created'),
+                    onPressed: () => Navigator.pushNamed(context, '/verification_pending'),
                   ),
                 ],
               ),
